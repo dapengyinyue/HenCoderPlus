@@ -6,7 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathDashPathEffect;
 import android.graphics.PathMeasure;
+
 import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -29,9 +31,16 @@ public class Dashboard extends View {
         paint.setStrokeWidth(Utils.dp2px(2));
         dash.addRect(0, 0, Utils.dp2px(2), Utils.dp2px(10), Path.Direction.CW);
         Path arc = new Path();
-        arc.addArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS, getWidth() / 2 + RADIUS , getHeight() / 2 + RADIUS, 90 + ANGLE / 2, 360 - ANGLE);
+        arc.addArc(getWidth() / 2 - RADIUS,
+                getHeight() / 2 - RADIUS,
+                getWidth() / 2 + RADIUS,
+                getHeight() / 2 + RADIUS,
+                90 + ANGLE / 2,
+                360 - ANGLE);
         PathMeasure pathMeasure = new PathMeasure(arc, false);
-        effect = new PathDashPathEffect(dash, (pathMeasure.getLength() - Utils.dp2px(2)) / 20, 0, PathDashPathEffect.Style.ROTATE);
+        effect = new PathDashPathEffect(dash,
+                (pathMeasure.getLength() - Utils.dp2px(2)) / 20, 0,
+                PathDashPathEffect.Style.ROTATE);
     }
 
     @Override
@@ -39,11 +48,16 @@ public class Dashboard extends View {
         super.onDraw(canvas);
 
         // 画线
-        canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS, getWidth() / 2 + RADIUS , getHeight() / 2 + RADIUS, 90 + ANGLE / 2, 360 - ANGLE, false, paint);
+        canvas.drawArc(
+                getWidth() / 2 - RADIUS,
+                getHeight() / 2 - RADIUS,
+                getWidth() / 2 + RADIUS,
+                getHeight() / 2 + RADIUS, 90 + ANGLE / 2, 360 - ANGLE, false, paint);
 
         // 画刻度
         paint.setPathEffect(effect);
-        canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS, getWidth() / 2 + RADIUS , getHeight() / 2 + RADIUS, 90 + ANGLE / 2, 360 - ANGLE, false, paint);
+        canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS, getWidth() / 2 + RADIUS
+                , getHeight() / 2 + RADIUS, 90 + ANGLE / 2, 360 - ANGLE, false, paint);
         paint.setPathEffect(null);
 
         // 画指针
