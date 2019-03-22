@@ -46,7 +46,9 @@ public class SportsView extends View {
         // 绘制进度条
         paint.setColor(HIGHLIGHT_COLOR);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS, getWidth() / 2 + RADIUS, getHeight() / 2 + RADIUS, -90, 225, false, paint);
+        canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS,
+                getWidth() / 2 + RADIUS, getHeight() / 2 + RADIUS,
+                -90, 225, false, paint);
 
         // 绘制文字
         paint.setTextSize(Utils.dp2px(100));
