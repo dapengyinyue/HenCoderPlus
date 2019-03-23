@@ -54,7 +54,7 @@ public class SportsView extends View {
         paint.setTextSize(Utils.dp2px(100));
         paint.setStyle(Paint.Style.FILL);
         paint.setTextAlign(Paint.Align.CENTER);
-//        paint.getTextBounds("abab", 0, "abab".length(), rect);
+//        textPaint.getTextBounds("abab", 0, "abab".length(), rect);
         float offset = (fontMetrics.ascent + fontMetrics.descent) / 2;
         canvas.drawText("abab", getWidth() / 2, getHeight() / 2 - offset, paint);
     }
