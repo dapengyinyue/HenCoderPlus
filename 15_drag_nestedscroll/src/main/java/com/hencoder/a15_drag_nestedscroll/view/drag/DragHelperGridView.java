@@ -14,11 +14,11 @@ public class DragHelperGridView extends ViewGroup {
     private static final int COLUMNS = 2;
     private static final int ROWS = 3;
 
-    ViewDragHelper dragHelper;
+    ViewDragHelper mDragHelper;
 
     public DragHelperGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        dragHelper = ViewDragHelper.create(this, new DragCallback());
+        mDragHelper = ViewDragHelper.create(this, new DragCallback());
     }
 
     @Override
@@ -51,18 +51,18 @@ public class DragHelperGridView extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return dragHelper.shouldInterceptTouchEvent(ev);
+        return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        dragHelper.processTouchEvent(event);
+        mDragHelper.processTouchEvent(event);
         return true;
     }
 
     @Override
     public void computeScroll() {
-        if (dragHelper.continueSettling(true)) {
+        if (mDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
@@ -79,7 +79,7 @@ public class DragHelperGridView extends ViewGroup {
         @Override
         public void onViewDragStateChanged(int state) {
             if (state == ViewDragHelper.STATE_IDLE) {
-                View capturedView = dragHelper.getCapturedView();
+                View capturedView = mDragHelper.getCapturedView();
                 if (capturedView != null) {
                     capturedView.setElevation(capturedView.getElevation() - 1);
                 }
@@ -109,7 +109,7 @@ public class DragHelperGridView extends ViewGroup {
 
         @Override
         public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
-            dragHelper.settleCapturedViewAt((int) capturedLeft, (int) capturedTop);
+            mDragHelper.settleCapturedViewAt((int) capturedLeft, (int) capturedTop);
             postInvalidateOnAnimation();
         }
     }

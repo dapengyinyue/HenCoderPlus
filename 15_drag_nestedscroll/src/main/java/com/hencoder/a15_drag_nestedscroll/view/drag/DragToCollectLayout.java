@@ -23,6 +23,8 @@ public class DragToCollectLayout extends RelativeLayout {
         @Override
         public boolean onLongClick(View v) {
             ClipData imageData = ClipData.newPlainText("name", v.getContentDescription());
+
+            //可以跨进程传输，imageData
             return ViewCompat.startDragAndDrop(v, imageData, new DragShadowBuilder(v), null, 0);
         }
     };

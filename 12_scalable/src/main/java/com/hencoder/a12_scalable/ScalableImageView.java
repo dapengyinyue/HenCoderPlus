@@ -119,7 +119,8 @@ public class ScalableImageView extends View {
         }
 
         @Override
-        public boolean onScroll(MotionEvent down, MotionEvent event, float distanceX, float distanceY) {
+        public boolean onScroll(MotionEvent down, MotionEvent event, float distanceX,
+                                float distanceY) {
             if (big) {
                 offsetX -= distanceX;
                 offsetY -= distanceY;
@@ -135,12 +136,13 @@ public class ScalableImageView extends View {
         }
 
         @Override
-        public boolean onFling(MotionEvent down, MotionEvent event, float velocityX, float velocityY) {
+        public boolean onFling(MotionEvent down, MotionEvent event, float velocityX,
+                               float velocityY) {
             if (big) {
                 scroller.fling((int) offsetX, (int) offsetY, (int) velocityX, (int) velocityY,
-                        - (int) (bitmap.getWidth() * bigScale - getWidth()) / 2,
+                        -(int) (bitmap.getWidth() * bigScale - getWidth()) / 2,
                         (int) (bitmap.getWidth() * bigScale - getWidth()) / 2,
-                        - (int) (bitmap.getHeight() * bigScale - getHeight()) / 2,
+                        -(int) (bitmap.getHeight() * bigScale - getHeight()) / 2,
                         (int) (bitmap.getHeight() * bigScale - getHeight()) / 2);
 
                 postOnAnimation(henFlingRunner);
@@ -157,8 +159,10 @@ public class ScalableImageView extends View {
         public boolean onDoubleTap(MotionEvent e) {
             big = !big;
             if (big) {
-                offsetX = (e.getX() - getWidth() / 2f) - (e.getX() - getWidth() / 2) * bigScale / smallScale;
-                offsetY = (e.getY() - getHeight() / 2f) - (e.getY() - getHeight() / 2) * bigScale / smallScale;
+                offsetX =
+                        (e.getX() - getWidth() / 2f) - (e.getX() - getWidth() / 2) * bigScale / smallScale;
+                offsetY =
+                        (e.getY() - getHeight() / 2f) - (e.getY() - getHeight() / 2) * bigScale / smallScale;
                 fixOffsets();
                 getScaleAnimator().start();
             } else {
@@ -175,9 +179,9 @@ public class ScalableImageView extends View {
 
     private void fixOffsets() {
         offsetX = Math.min(offsetX, (bitmap.getWidth() * bigScale - getWidth()) / 2);
-        offsetX = Math.max(offsetX, - (bitmap.getWidth() * bigScale - getWidth()) / 2);
+        offsetX = Math.max(offsetX, -(bitmap.getWidth() * bigScale - getWidth()) / 2);
         offsetY = Math.min(offsetY, (bitmap.getHeight() * bigScale - getHeight()) / 2);
-        offsetY = Math.max(offsetY, - (bitmap.getHeight() * bigScale - getHeight()) / 2);
+        offsetY = Math.max(offsetY, -(bitmap.getHeight() * bigScale - getHeight()) / 2);
     }
 
     class HenFlingRunner implements Runnable {
