@@ -11,12 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
-//        thread();
+        thread();
 //        runnable();
 //        threadFactory();
 //        executor();
 //        callable();
-        runSynchronized1Demo();
+//        runSynchronized1Demo();
 //        runSynchronized2Demo();
 //        runSynchronized3Demo();
 //        runReadWriteLockDemo();
@@ -26,13 +26,29 @@ public class Main {
      * 使用 Thread 类来定义工作
      */
     static void thread() {
+        System.out.println("main thread, currentThread:" + Thread.currentThread().getName());
         Thread thread = new Thread() {
             @Override
             public void run() {
-                System.out.println("Thread started!");
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Thread1 started!, currentThread:" + Thread.currentThread().getName());
             }
         };
+        thread.run();
         thread.start();
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread2 started!, currentThread:" + Thread.currentThread().getName());
+            }
+        });
+        thread1.run();
+        thread1.start();
     }
 
     /**
