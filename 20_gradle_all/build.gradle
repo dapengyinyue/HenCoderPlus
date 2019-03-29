@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.a04_http"
+        applicationId "com.example.a20_gradle_all"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -17,6 +17,9 @@ android {
     }
 
     buildTypes {
+        debug {
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -33,9 +36,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
+//task clean(type: Delete) {
+//    println "before!!!"
+//    delete rootProject.buildDir
+//    println "after!!!"
+//}
