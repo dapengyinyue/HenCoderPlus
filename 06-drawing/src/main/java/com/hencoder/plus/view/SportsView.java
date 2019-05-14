@@ -13,49 +13,51 @@ import android.view.View;
 import com.hencoder.plus.Utils;
 
 public class SportsView extends View {
-    private static final float RING_WIDTH = Utils.dp2px(20);
-    private static final float RADIUS = Utils.dp2px(150);
-    private static final int CIRCLE_COLOR = Color.parseColor("#90A4AE");
-    private static final int HIGHLIGHT_COLOR = Color.parseColor("#FF4081");
 
-    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    Rect rect = new Rect();
-    Paint.FontMetrics fontMetrics = new Paint.FontMetrics();
+  private static final float RING_WIDTH = Utils.dp2px(20);
+  private static final float RADIUS = Utils.dp2px(150);
+  private static final int CIRCLE_COLOR = Color.parseColor("#90A4AE");
+  private static final int HIGHLIGHT_COLOR = Color.parseColor("#FF4081");
 
-    public SportsView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
+  Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+  Rect rect = new Rect();
+  Paint.FontMetrics fontMetrics = new Paint.FontMetrics();
 
-    {
-        paint.setTextSize(Utils.dp2px(100));
-        paint.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Quicksand-Regular.ttf"));
-        paint.getFontMetrics(fontMetrics);
-        paint.setTextAlign(Paint.Align.CENTER);
-    }
+  public SportsView(Context context, @Nullable AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+  {
+    paint.setTextSize(Utils.dp2px(100));
+    paint.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Quicksand-Regular.ttf"));
+    paint.getFontMetrics(fontMetrics);
+    paint.setTextAlign(Paint.Align.CENTER);
+  }
 
-        // 绘制环
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(CIRCLE_COLOR);
-        paint.setStrokeWidth(RING_WIDTH);
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, RADIUS, paint);
+  @Override
+  protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
 
-        // 绘制进度条
-        paint.setColor(HIGHLIGHT_COLOR);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS,
-                getWidth() / 2 + RADIUS, getHeight() / 2 + RADIUS,
-                -90, 225, false, paint);
+    // 绘制环
+    paint.setStyle(Paint.Style.STROKE);
+    paint.setColor(CIRCLE_COLOR);
+    paint.setStrokeWidth(RING_WIDTH);
+    canvas.drawCircle(getWidth() / 2, getHeight() / 2, RADIUS, paint);
 
-        // 绘制文字
-        paint.setTextSize(Utils.dp2px(100));
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextAlign(Paint.Align.CENTER);
-//        textPaint.getTextBounds("abab", 0, "abab".length(), rect);
-        float offset = (fontMetrics.ascent + fontMetrics.descent) / 2;
-        canvas.drawText("abab", getWidth() / 2, getHeight() / 2 - offset, paint);
-    }
+    // 绘制进度条
+    paint.setColor(HIGHLIGHT_COLOR);
+    paint.setStrokeCap(Paint.Cap.ROUND);
+    canvas.drawArc(getWidth() / 2 - RADIUS, getHeight() / 2 - RADIUS, getWidth() / 2 + RADIUS,
+        getHeight() / 2 + RADIUS, -90, 225, false, paint);
+
+    // 绘制文字
+    paint.setTextSize(Utils.dp2px(100));
+    paint.setStyle(Paint.Style.FILL);
+    paint.setTextAlign(Paint.Align.CENTER);
+
+//    paint.getTextBounds("abab", 0, "abab".length(), rect);
+//    float offset = (rect.top + rect.bottom) / 2;                        //第一种实现方案
+    float offset = (fontMetrics.ascent + fontMetrics.descent) / 2;    //第二种实现方案
+    canvas.drawText("abab", getWidth() / 2, getHeight() / 2 - offset, paint);
+  }
 }
